@@ -13,17 +13,24 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(std_msgs REQUIRED)
 find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
 
 add_executable(base_drive src/base_drive.cpp)
 target_link_libraries(base_drive PRIVATE
   rclcpp::rclcpp
   std_msgs::std_msgs__rosidl_typesupport_cpp
   geometry_msgs::geometry_msgs__rosidl_typesupport_cpp
+  nav_msgs::nav_msgs__rosidl_typesupport_cpp
 )
 
 install(TARGETS
   base_drive
   DESTINATION lib/${PROJECT_NAME}
+)
+
+install(DIRECTORY
+  launch
+  DESTINATION share/${PROJECT_NAME}
 )
 
 if(BUILD_TESTING)
